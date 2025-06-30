@@ -1,22 +1,29 @@
 {
-  "manifest_version": 2,
-  "version": "1.0.0",
-
+  "manifest_version": 3,
   "name": "UnsafeYT",
+  "version": "1.0.0",
   "description": "Decrypt unsafe videos",
-
-  "content_scripts": [{
-    "matches": ["https://www.youtube.com/*", "http://0.0.0.0:2000/*", "http://localhost:2000/*"],
-    "js": ["jquery.js", "background.js"]
-  }],
-  
-  "web_accessible_resources": [
-    "shaders/screen.frag",
-    "shaders/screen.vrt"
-  ],
-
-  "browser_action": {
+  "permissions": ["tabs", "scripting"],
+  "action": {
     "default_popup": "index.html"
   },
-  "permissions": ["tabs"]
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "http://0.0.0.0:2000/*",
+        "http://localhost:2000/*"
+      ],
+      "js": ["jquery.js", "background.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "shaders/screen.frag",
+        "shaders/screen.vrt"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
